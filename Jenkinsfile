@@ -26,10 +26,9 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('JaCoCo') {
+        stage('nexus') {
             steps {
-                sh 'Code Coverage'
-                jacoco()
+                sh 'mvn deploy'
             }
         }
         stage('Package') {
