@@ -6,6 +6,8 @@ services:
       - '9000:9000'
     volumes:
        - sonar-data:/home/sonarqube
+    command:
+       - -Dsonar.ce.javaOpts=-Xmx2048m -Dsonar.web.javaOpts=-Xmx2048m
     
   nexus-v3:
     image: 'gabrieljoe/nexusv3-petclinic:latest'
