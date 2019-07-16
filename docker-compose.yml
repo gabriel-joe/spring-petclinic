@@ -6,13 +6,15 @@ services:
       - '3306:3306'
     
   web:
-    image: 'spring-pet:2.1.0'
+    image: 'gabrieljoe/spring-pet:2.1.0'
     depends_on:
       - mysql
     links:
       - mysql
     ports:
       - '8080:8080'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://192.168.99.100/petclinic?useSSL=false&allowPublicKeyRetrieval=true
       
 networks:
   default:
