@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        docker { image 'maven:3-alpine' }
-    }
+    agent none
     stages {
         stage('Checkout') {
             steps {
@@ -9,12 +7,6 @@ pipeline {
             }
         }
         stage('Build') {
-			agent {
-				docker {
-					image 'maven:3-alpine'
-					args '-v $HOME/.m2:/root/.m2'
-				}
-			}
             steps {
                 echo 'Clean Build'
                 sh 'mvn clean compile'
@@ -26,15 +18,14 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('nexus') {
+		stage('sonar') {
             steps {
-                sh 'mvn deploy'
+                sh 'mvn sonar:sonar -Dsonar.scm.disabled=true -Dsonar.host.url=http://192.168.99.100:9000'
             }
         }
-        stage('Package') {
+        stage('publish') {
             steps {
-                echo 'Packaging'
-                sh 'mvn package -DskipTests'
+                sh 'mvn --settings settings.xml deploy'
             }
         }
         stage('Deploy') {
