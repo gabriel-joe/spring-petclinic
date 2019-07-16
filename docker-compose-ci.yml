@@ -4,8 +4,6 @@ services:
     image: 'gabrieljoe/sonarqube-petclinic:latest'
     ports:
       - '9000:9000'
-    volumes:
-       - sonar-data:/home/sonarqube
     command:
        - -Dsonar.ce.javaOpts=-Xmx2048m -Dsonar.web.javaOpts=-Xmx2048m
     
@@ -13,15 +11,11 @@ services:
     image: 'gabrieljoe/nexusv3-petclinic:latest'
     ports:
       - '8081:8081'
-    volumes:
-       - nexus-data:/nexus-data
   jenkins:
     image: 'gabrieljoe/jenkins-petclinic:latest'
     ports:
       - '8080:8080'
       - '50000:50000'
-    volumes:
-       - jenkins-data:/var/jenkins_home
       
     
 
