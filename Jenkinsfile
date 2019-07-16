@@ -27,7 +27,7 @@ pipeline {
         }
 		stage('sonar') {
             steps {
-                sh 'mvn sonar:sonar -Dsonar.scm.disabled=true -Dsonar.host.url=${SONAR_HOST}'
+                sh 'mvn sonar:sonar -Dsonar.scm.disabled=true -Dsonar.host.url=$SONAR_HOST'
             }
         }
         stage('publish-jar') {
@@ -37,9 +37,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo ${NEXUS_PASSWORD} | docker login -u ${NEXUS_USER} --password-stdin ${NEXUS_HOST}
-				sh docker build . -t ${NEXUS_HOST}/spring-petclinic:${DOCKER_VERSION}
-                sh docker push ${NEXUS_HOST}/spring-petclinic:${DOCKER_VERSION}
+                echo ${NEXUS_PASSWORD} | docker login -u $NEXUS_USER --password-stdin $NEXUS_HOST
+				sh docker build . -t $NEXUS_HOST/spring-petclinic:$DOCKER_VERSION
+                sh docker push $NEXUS_HOST}/spring-petclinic:$DOCKER_VERSION
             }
         }
     }
