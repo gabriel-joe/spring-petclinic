@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Clean/Build'
-				echo '${APP_VERSION}'
+				echo '$APP_VERSION'
                 sh 'mvn clean compile'
             }
         }
@@ -31,7 +31,7 @@ pipeline {
             steps {
                 sh 'echo $NEXUS_PASSWORD | docker login -u $NEXUS_USER --password-stdin $NEXUS_HOST'
 				sh 'docker build . -t $NEXUS_HOST/spring-petclinic:$DOCKER_VERSION'
-                sh 'docker push $NEXUS_HOST}/spring-petclinic:$DOCKER_VERSION'
+                sh 'docker push $NEXUS_HOST/spring-petclinic:$DOCKER_VERSION'
             }
         }
     }    
