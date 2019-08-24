@@ -16,7 +16,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Clean/Build'
-				echo '${APP_VERSION}'
+				echo '$APP_VERSION'
                 sh 'mvn clean compile'
             }
         }
