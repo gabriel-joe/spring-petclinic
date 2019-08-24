@@ -8,10 +8,16 @@ pipeline {
 	  APP_VERSION = sh(returnStdout: true, script: """ echo \$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml) """)
 	}
     stages {
+		stage('Compile') {
+            steps {
+                echo 'Compile'
+                sh 'mvn clean compile'
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Clean/Build'
-                sh 'mvn clean build'
+                sh 'mvn clean install'
             }
         }
         stage('Test') {
