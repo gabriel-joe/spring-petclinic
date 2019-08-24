@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('variables') {
             steps {
-                sh """ export APP_VERSION=$(xmllint --xpath '/*[local-name()=\"project\"]/*[local-name()=\"version\"]/text()' pom.xml) """
+                sh """ export APP_VERSION=\$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml) """
             }
         }
         stage('Build') {
