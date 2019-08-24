@@ -6,7 +6,6 @@
   <groupId>org.springframework.samples</groupId>
   <artifactId>spring-petclinic</artifactId>
   <version>2.1.0.BUILD-SNAPSHOT</version>
-  <docker-version>latest</docker-version>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -21,7 +20,7 @@
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
+	<docker-version>latest</docker-version>
     <!-- Web dependencies -->
     <webjars-bootstrap.version>3.3.6</webjars-bootstrap.version>
     <webjars-jquery-ui.version>1.11.4</webjars-jquery-ui.version>
