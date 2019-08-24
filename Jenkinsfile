@@ -13,6 +13,7 @@ pipeline {
             steps {
                 echo 'Clean/Build'
 				sh 'echo $APP_VERSION'
+				sh 'echo $DOCKER_VERSION'
                 sh 'mvn clean compile'
             }
         }
