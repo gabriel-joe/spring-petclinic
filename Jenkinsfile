@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Clean/Build'
-				echo '$DOCKER_VERSION'
+				sh 'echo $DOCKER_VERSION'
                 sh 'mvn clean compile'
             }
         }
