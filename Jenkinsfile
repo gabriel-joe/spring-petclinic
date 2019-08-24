@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('variables') {
             steps {
-                sh 'export APP_VERSION=$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml)'
+                sh """ export APP_VERSION=$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml) """
             }
         }
         stage('Build') {
@@ -38,8 +38,7 @@ pipeline {
                 sh 'docker push $NEXUS_HOST}/spring-petclinic:$DOCKER_VERSION'
             }
         }
-    }
-    
+    }    
     post {
         always {
             echo 'JENKINS PIPELINE'
