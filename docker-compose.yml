@@ -2,11 +2,16 @@ version: '3'
 services:
   mysql:
     image: 'mysql:5.7'
+    environment:
+      - MYSQL_PASSWORD=petclinic
+      - MYSQL_USER=gabriel
+      - MYSQL_DATABASE=petclinic
+      - MYSQL_ROOT_PASSWORD=petclinic
     ports:
       - '3306:3306'
     
   web:
-    image: 'gabrieljoe/spring-pet:2.1.0'
+    image: 'gabrieljoe/spring-petclinic:latest'
     depends_on:
       - mysql
     links:
