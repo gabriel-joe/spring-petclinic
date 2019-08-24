@@ -8,14 +8,15 @@ pipeline {
 	  DOCKER_VERSION = '2.1.0'
 	}
     stages {
-        stage('Checkout') {
+        stage('variables') {
             steps {
-                echo 'Checkout'
+                sh 'export APP_VERSION=$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml'
             }
         }
         stage('Build') {
             steps {
                 echo 'Clean/Build'
+				echo '${APP_VERSION}'
                 sh 'mvn clean compile'
             }
         }
@@ -23,11 +24,6 @@ pipeline {
             steps {
                 echo 'Testing'
                 sh 'mvn test'
-            }
-        }
-		stage('sonar') {
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.scm.disabled=true -Dsonar.host.url=$SONAR_HOST'
             }
         }
         stage('publish-jar') {
