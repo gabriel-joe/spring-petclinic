@@ -5,7 +5,7 @@ pipeline {
 	  SONAR_HOST = 'http://192.168.99.100:9000'
 	  NEXUS_USER = 'admin'
 	  NEXUS_PASSWOD = 'gabriel12'
-	  DOCKER_VERSION = '2.1.0'
+	  DOCKER_VERSION = sh(returnStdout: true, script: """ echo \$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="docker-version"]/text()' pom.xml) """)
 	  APP_VERSION = sh(returnStdout: true, script: """ echo \$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml) """)
 	}
     stages {
