@@ -24,7 +24,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USER --password-stdin'
-				sh 'docker build . -t $NEXUS_HOST/spring-petclinic:$DOCKER_VERSION'
+				sh 'docker build . -t $DOCKERHUB_USER/spring-petclinic:$DOCKER_VERSION'
                 sh 'docker push $DOCKERHUB_USER/spring-petclinic:$DOCKER_VERSION'
             }
         }
