@@ -1,3 +1,5 @@
+def APP_VERSION = 'UNKNOWN'
+
 pipeline {
     agent any
 	environment {
@@ -6,13 +8,17 @@ pipeline {
 	  NEXUS_USER = 'admin'
 	  NEXUS_PASSWOD = 'gabriel12'
 	  DOCKER_VERSION = '2.1.0'
-	  APP_VERSION= $(xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml)
 	}
     stages {
+        stage('variables') {
+            steps {
+                sh """  APP_VERSION=\$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml) """
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Clean/Build'
-				echo '$APP_VERSION'
+				echo '${APP_VERSION}'
                 sh 'mvn clean compile'
             }
         }
