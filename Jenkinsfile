@@ -1,10 +1,8 @@
 pipeline {
     agent any
 	environment {
-	  NEXUS_HOST = '192.168.99.100:8081'
-	  SONAR_HOST = 'http://192.168.99.100:9000'
-	  NEXUS_USER = 'admin'
-	  NEXUS_PASSWOD = 'gabriel12'
+	  DOCKERHUB_USER = 'gabrieljoe'
+	  DOCKERHUB_PASSWORD = 'pF2KSDEbAbDyBGT'
 	  DOCKER_VERSION = sh(returnStdout: true, script: """ echo \$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="properties"]/*[local-name()="docker-version"]/text()' pom.xml) """)
 	  APP_VERSION = sh(returnStdout: true, script: """ echo \$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml) """)
 	}
@@ -23,16 +21,11 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('publish-jar') {
-            steps {
-                sh 'mvn --settings settings.xml deploy'
-            }
-        }
         stage('Deploy') {
             steps {
-                sh 'echo $NEXUS_PASSWORD | docker login -u $NEXUS_USER --password-stdin $NEXUS_HOST'
+                sh 'echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USER --password-stdin'
 				sh 'docker build . -t $NEXUS_HOST/spring-petclinic:$DOCKER_VERSION'
-                sh 'docker push $NEXUS_HOST/spring-petclinic:$DOCKER_VERSION'
+                sh 'docker push $DOCKERHUB_USER/spring-petclinic:$DOCKER_VERSION'
             }
         }
     }    
