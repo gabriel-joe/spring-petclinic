@@ -6,7 +6,7 @@ pipeline {
 	  NEXUS_USER = 'admin'
 	  NEXUS_PASSWOD = 'gabriel12'
 	  DOCKER_VERSION = '2.1.0'
-	  APP_VERSION = sh """ xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml """
+	  APP_VERSION = sh(""" xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml """)
 	}
     stages {
         stage('Build') {
