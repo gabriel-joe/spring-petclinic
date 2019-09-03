@@ -29,7 +29,7 @@ pipeline {
         stage('Deploy') {
             steps {
 				echo 'Deploy'
-                sh 'echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USER --password-stdin'
+                // sh 'echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USER --password-stdin'
 				sh 'docker build . -t $DOCKERHUB_REPOSITORY/spring-petclinic:$DOCKER_VERSION'
                 sh 'docker push $DOCKERHUB_REPOSITORY/spring-petclinic:$DOCKER_VERSION'
             }
