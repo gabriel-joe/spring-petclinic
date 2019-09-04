@@ -1,5 +1,10 @@
 dist: trusty
 language: java
 jdk: oraclejdk8
-services:
-  - docker
+deploy:
+  provider: heroku
+  api_key:
+    secure: KEY
+  app: spring-petclinic
+  on:
+    repo: gabrieljoe/spring-petclinic
