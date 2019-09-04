@@ -11,19 +11,19 @@ pipeline {
 		stage('Compile') {
             steps {
                 echo 'Compile'
-                sh 'mvn clean compile'
+                sh 'mvnw clean compile'
             }
         }
         stage('Build') {
             steps {
                 echo 'Clean/Build'
-                sh 'mvn clean install'
+                sh 'mvnw clean install'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing'
-                sh 'mvn test'
+                sh 'mvnw test'
             }
         }
         stage('Deploy') {
