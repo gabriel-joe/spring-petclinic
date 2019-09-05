@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ( -z "$DOCKER_USERNAME" )
+if [ -z "$DOCKER_USERNAME" ]
     then
       echo -e "\tSkipping docker publish because missing variable \$DOCKER_USERNAME"
       exit 0
