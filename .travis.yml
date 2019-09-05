@@ -7,4 +7,5 @@ deploy:
     secure: KEY
   app: spring-pet
   on:
-    repo: gabrieljoe/spring-petclinic
+    repo: gabriel-joe/spring-petclinic
+          
