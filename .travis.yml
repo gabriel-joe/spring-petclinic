@@ -26,7 +26,7 @@ jobs:
      deploy: &heroku
       provider: heroku 
       api_key:
-        secure: $HEROKU_KEY
+        secure: e1803e5e-2239-466c-838e-ba11ac43ea3f
       app: spring-pet
       on:
         repo: gabriel-joe/spring-petclinic
