@@ -5,6 +5,11 @@ cache:
   directories:
   - .autoconf
   - $HOME/.m2
+stages:
+  - build
+  - test
+  - publish
+  - deploy
 jobs:
   allow_failures:
    - script: ./docker-build-push
