@@ -1,11 +1,21 @@
 dist: trusty
 language: java
 jdk: oraclejdk8
-deploy:
-  provider: heroku
-  api_key:
-    secure: e1803e5e-2239-466c-838e-ba11ac43ea3f
-  app: spring-pet
-  on:
-    repo: gabriel-joe/spring-petclinic
+jobs:
+   - stage: build
+     name: "Build product"
+     script: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+   - stage: test
+     name: "Test version"
+     script: ./mvnw test -B
+   - stage: deploy
+     script: skip 
+     deploy:
+      provider: heroku 
+      api_key:
+        secure: e1803e5e-2239-466c-838e-ba11ac43ea3f
+      app: spring-pet
+      on:
+        repo: gabriel-joe/spring-petclinic
+
           
