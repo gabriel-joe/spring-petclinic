@@ -1,5 +1,14 @@
 #!/bin/bash
 
+if ( -z "$DOCKER_USERNAME" )
+    then
+      echo -e "\tSkipping docker publish because missing variable $DOCKER_USERNAME"
+      exit 0
+else
+    echo -e "\tExecuting docker publishing"
+fi
+
+
 set -ev
 sudo apt-get update -y
 sudo apt-get install libxml2-utils -y
