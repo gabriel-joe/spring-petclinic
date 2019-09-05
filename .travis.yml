@@ -26,7 +26,6 @@ jobs:
      script:
       - chmod +x ./docker-build-push     
       - ./docker-build-push
-     if: (NOT type IN (pull_request)) AND (branch = master)
    - stage: deploy
      name: Deploy heroku
      script: skip 
