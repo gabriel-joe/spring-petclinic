@@ -10,7 +10,7 @@ jobs:
      script: ./mvnw test -B
    - stage: deploy
      script: skip 
-     deploy:
+     deploy: &heroku
       provider: heroku 
       api_key:
         secure: e1803e5e-2239-466c-838e-ba11ac43ea3f
