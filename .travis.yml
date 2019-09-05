@@ -23,7 +23,8 @@ jobs:
    - stage: publish
      name: "Publish docker image"
      sudo: required
-     script: 
+     script:
+      - chmod +x ./docker-build-push     
       - ./docker-build-push
      if: (NOT type IN (pull_request)) AND (branch = master)
    - stage: deploy
