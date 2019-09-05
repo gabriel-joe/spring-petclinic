@@ -10,6 +10,7 @@ jobs:
      name: "Test version"
      script: ./mvnw test -B
    - stage: deploy
+     name: Deploy heroku
      script: skip 
      deploy: &heroku
       provider: heroku 
