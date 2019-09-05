@@ -2,7 +2,7 @@
 
 set -ev
 
-apt-get install libxml2-utils -y
+sudo apt-get install libxml2-utils -y
 export DOCKER_VERSION = $(xmllint --xpath '/*[local-name()="project"]/*[local-name()="properties"]/*[local-name()="docker-version"]/text()' pom.xml)
 app_name="spring-petclinic"
 app_image="${DOCKER_USERNAME}/${app_name}:${DOCKER_VERSION}"
