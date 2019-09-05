@@ -22,6 +22,7 @@ jobs:
      script: ./mvnw test -B
    - stage: publish
      name: "Publish docker image"
+     sudo: required
      script: 
       - ./docker-build-push
      if: (NOT type IN (pull_request)) AND (branch = master)
