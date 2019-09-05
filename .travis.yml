@@ -6,6 +6,8 @@ cache:
   - .autoconf
   - $HOME/.m2
 jobs:
+  allow_failures:
+   - script: ./docker-build-push
   include:
    - stage: build
      name: "Build product"
@@ -16,10 +18,8 @@ jobs:
    - stage: publish
      name: "Publish docker image"
      script: 
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -t $DOCKER_USERNAME/spring-petclinic .
-      - docker images
-      - docker push $DOCKER_USERNAME/spring-petclinic
+      - ./docker-build-push
+     if: (NOT type IN (pull_request)) AND (branch = master)
    - stage: deploy
      name: Deploy heroku
      script: skip 
