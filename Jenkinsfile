@@ -19,13 +19,13 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Clean/Build'
-                sh '.\mvnw clean install --skipTests'
+                sh 'mvn clean install --skipTests'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing'
-                sh '.\mvnw test'
+                sh 'mvn test'
             }
         }
         stage('Deploy') {
