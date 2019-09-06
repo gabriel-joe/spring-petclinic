@@ -31,7 +31,7 @@ pipeline {
         stage('Deploy') {
             steps {
 		echo 'Deploy to heroku'
-                herokuDeploy()
+                herokuDeploy("${HEROKU_API_KEY}")
             }
         }
     }    
@@ -57,7 +57,7 @@ pipeline {
 }
 
 
-def herokuDeploy () {
+def herokuDeploy (HEROKU_API_KEY) {
    withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
        mvn "heroku:deploy -DskipTests=true -Dmaven.javadoc.skip=true -B -V -D heroku.appName=${HEROKU_APP}"
     }
