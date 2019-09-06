@@ -1,9 +1,6 @@
 pipeline {
     agent any
 	environment {
-	  DOCKERHUB_USER = 'gabrieljoe'
-	  DOCKERHUB_PASSWORD = 'pF2KSDEbAbDyBGT'
-	  DOCKERHUB_REPOSITORY = 'gabrieljoe'
           HEROKU_APP = 'spring-pet'
           HEROKU_API_KEY = 'e1803e5e-2239-466c-838e-ba11ac43ea3f'
 	  DOCKER_VERSION = sh(returnStdout: true, script: """ echo \$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="properties"]/*[local-name()="docker-version"]/text()' pom.xml) """)
@@ -58,7 +55,7 @@ pipeline {
 
 
 def herokuDeploy (HEROKU_API_KEY) {
-   withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
+        withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: '${HEROKU_API_KEY}']]) {
        mvn "heroku:deploy -DskipTests=true -Dmaven.javadoc.skip=true -B -V -D heroku.appName=${HEROKU_APP}"
     }
 }
