@@ -10,25 +10,25 @@ pipeline {
        stage('Compile') {
             steps {
                 echo 'Compile'
-                sh 'mvn clean compile'
+                mvn 'clean compile'
             }
         }
         stage('Build') {
             steps {
                 echo 'Clean/Build'
-                sh 'mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V'
+                mvn 'clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing'
-                sh 'mvn test'
+                mvn 'test'
             }
         }
         stage('Deploy') {
             steps {
 		echo 'Deploy to heroku'
-                herokuDeploy("${HEROKU_API_KEY}")
+                mvn 'heroku:deploy -DskipTests=true -Dmaven.javadoc.skip=true -B -V -D heroku.appName=${HEROKU_APP}'
             }
         }
     }    
@@ -38,11 +38,11 @@ pipeline {
         }
         success {
             echo 'JENKINS PIPELINE SUCCESSFUL'
-			deleteDir()
+	    deleteDir()
         }
         failure {
             echo 'JENKINS PIPELINE FAILED'
-			deleteDir()
+	    deleteDir()
         }
         unstable {
             echo 'JENKINS PIPELINE WAS MARKED AS UNSTABLE'
@@ -51,11 +51,4 @@ pipeline {
             echo 'JENKINS PIPELINE STATUS HAS CHANGED SINCE LAST EXECUTION'
         }
     }        
-}
-
-
-def herokuDeploy (HEROKU_API_KEY) {
-        withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: '${HEROKU_API_KEY}']]) {
-       mvn "heroku:deploy -DskipTests=true -Dmaven.javadoc.skip=true -B -V -D heroku.appName=${HEROKU_APP}"
-    }
 }
