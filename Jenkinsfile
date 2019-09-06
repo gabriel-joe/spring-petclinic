@@ -10,25 +10,25 @@ pipeline {
        stage('Compile') {
             steps {
                 echo 'Compile'
-                mvn 'clean compile'
+                sh 'mvn clean compile'
             }
         }
         stage('Build') {
             steps {
                 echo 'Clean/Build'
-                mvn 'clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V'
+                sh 'mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing'
-                mvn 'test'
+                sh 'mvn test'
             }
         }
         stage('Deploy') {
             steps {
 		echo 'Deploy to heroku'
-                mvn 'heroku:deploy -DskipTests=true -Dmaven.javadoc.skip=true -B -V -D heroku.appName=${HEROKU_APP}'
+                sh 'mvn heroku:deploy -DskipTests=true -Dmaven.javadoc.skip=true -B -V -D heroku.appName=${HEROKU_APP}'
             }
         }
     }    
