@@ -28,7 +28,6 @@ pipeline {
         stage('Deploy') {
             steps {
 		echo 'Deploy to heroku'
-                sh 'heroku buildpacks:clear --app ${HEROKU_APP}'
                 sh 'mvn heroku:deploy -DskipTests=true -Dmaven.javadoc.skip=true -B -V -D heroku.appName=${HEROKU_APP}'
             }
         }
