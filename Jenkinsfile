@@ -19,7 +19,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Clean/Build'
-                sh 'mvn clean install --skipTests'
+                sh 'mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V'
             }
         }
         stage('Test') {
